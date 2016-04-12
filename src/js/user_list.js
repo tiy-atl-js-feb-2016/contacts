@@ -2,54 +2,34 @@ import React, { Component, PropTypes } from 'react';
 import USER_SHAPE from './user_shape';
 import Icon from './icon';
 import Panel from './panel';
+import users from './user_data';
+import { Link } from 'react-router';
 
 export default class UserList extends Component {
-  static propTypes = {
-    users: PropTypes.arrayOf(USER_SHAPE).isRequired,
-
-    // users: PropTypes.array.isRequired
-
-    onUserSelect: PropTypes.func.isRequired,
-    onUserRemove: PropTypes.func.isRequired,
-
-    onNew: PropTypes.func.isRequired
+  constructor(...args) {
+    super(...args);
+    this.state = { users };
   }
 
   getUser(user) {
-    let { onUserSelect, onUserRemove } = this.props;
     return (
       <li key={user.name}>
-        <span onClick={onUserSelect.bind(null, user)}>{user.name}</span>
-        <button onClick={() => onUserRemove(user)}>Remove</button>
+        <Link to="/user-details">{user.name}</Link>
+        <button onClick={() => this.removeUser(user)}>Remove</button>
       </li>
     )
   }
 
-  // userClickHandler(user, {target: {tagName}}) {
-  //   let { onUserSelect, onUserRemove } = this.props;
-  //   let method = ['button', 'i'].indexOf(tagName) >= 0
-  //     ? onUserRemove
-  //     : onUserSelect;
-  //   method(user);
-  // }
-  //
-  // getUser(user) {
-  //   return (
-  //     <li key={user.name} onClick={this.userClickHandler.bind(this, user)}>
-  //       <span><Icon type="user"/> {user.name}</span>
-  //       <button className="remove">
-  //         <Icon type="remove" className="remove"/>
-  //       </button>
-  //     </li>
-  //   )
-  // }
+  removeUser(user) {
+    users.splice(users.indexOf(user), 1);
+    this.setState({users});
+  }
 
   render() {
-    let { users, onUserSelect, onNew } = this.props;
-
+    let { users } = this.state;
     return (
       <Panel title="User List" className="user-list">
-        <button onClick={onNew}>Add Contact</button>
+        <Link to="/add-contact">Add Contact</Link>
         <h1>My Peeps</h1>
         <ul>{users.map(::this.getUser)}</ul>
       </Panel>

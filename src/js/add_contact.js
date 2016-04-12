@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import SSF from 'react-simple-serial-form';
 import Dropzone from 'react-dropzone';
+import users from './user_data';
+import { hashHistory } from 'react-router';
 
 export default class AddContact extends Component {
-  static propTypes = {
-    onAdd: PropTypes.func.isRequired
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -19,14 +17,14 @@ export default class AddContact extends Component {
   }
 
   dataHandler(data) {
-    this.props.onAdd(data);
+    users.push(data);
+    hashHistory.push('/');
   }
 
   render() {
-    let { onAdd } = this.props;
     return (
       <div className="add-contact">
-        <SSF onData={::this.dataHandler}>
+        <SSF onData={this.dataHandler}>
           <div>
             <label>
               Fullname:
