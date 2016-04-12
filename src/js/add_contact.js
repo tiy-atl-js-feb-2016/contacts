@@ -16,11 +16,9 @@ export default class AddContact extends Component {
 
   dropHandler([file]) {
     this.setState({preview: file.preview});
-    this.file = file;
   }
 
   dataHandler(data) {
-    data.file = this.file;
     this.props.onAdd(data);
   }
 
@@ -56,6 +54,7 @@ export default class AddContact extends Component {
           <div>
             <Dropzone onDrop={::this.dropHandler}>
               Drop Picture Here
+              <input type="hidden" name="photo" value={this.state.preview}/>
               <img src={this.state.preview}/>
             </Dropzone>
           </div>
