@@ -11,7 +11,7 @@ import { Router, Route, hashHistory } from 'react-router';
 render((
   <Router history={hashHistory}>
     <Route path="/" component={UserList}/>
-    <Route path="/user-details" component={UserDetails}/>
+    <Route path="/user-details/:user_name" component={UserDetails}/>
     <Route path="/add-contact" component={AddContact}/>
   </Router>
 ), document.querySelector('.app'))

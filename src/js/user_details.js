@@ -3,11 +3,13 @@ import Icon from './icon';
 import USER_SHAPE from './user_shape';
 import users from './user_data';
 
-let user = users[0];
-
 export default class UserDetails extends Component {
 
   render() {
+    console.log('user name:', this.props.params.user_name);
+    let { user_name } = this.props.params;
+    let user = users.find(currentUser => currentUser.name === user_name);
+
     return (
       <div className="user-details">
         <div className="avatar">

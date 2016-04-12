@@ -14,7 +14,7 @@ export default class UserList extends Component {
   getUser(user) {
     return (
       <li key={user.name}>
-        <Link to="/user-details">{user.name}</Link>
+        <Link to={`/user-details/${user.name}`}>{user.name}</Link>
         <button onClick={() => this.removeUser(user)}>Remove</button>
       </li>
     )
