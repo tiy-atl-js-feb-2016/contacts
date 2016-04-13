@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import SSF from 'react-simple-serial-form';
 import Dropzone from 'react-dropzone';
-import users from './user_data';
 import { hashHistory } from 'react-router';
+import { ajax } from 'jquery';
 
 export default class AddContact extends Component {
   constructor(props) {
@@ -17,8 +17,18 @@ export default class AddContact extends Component {
   }
 
   dataHandler(data) {
-    users.push(data);
-    hashHistory.push('/');
+    //users.push(data);
+    let config = {
+      url: 'http://10.0.0.24:8026/data',
+      type: 'POST',
+      dataType: 'json',
+      contentType : 'application/json',
+      processData: false,
+      data: JSON.stringify(data)
+    }
+    ajax(config).then(() => {
+      hashHistory.push('/');
+    })
   }
 
   render() {

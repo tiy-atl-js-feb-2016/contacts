@@ -2,16 +2,17 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import users from './user_data';
 import UserDetails from './user_details';
 import UserList from './user_list';
 import AddContact from './add_contact';
 import { Router, Route, hashHistory } from 'react-router';
+import UserEdit from './user_edit';
 
 render((
   <Router history={hashHistory}>
     <Route path="/" component={UserList}/>
-    <Route path="/user-details/:user_name" component={UserDetails}/>
+    <Route path="/user-details/:user_id" component={UserDetails}/>
+    <Route path="/edit-user/:user_id" component={UserEdit}/>
     <Route path="/add-contact" component={AddContact}/>
   </Router>
 ), document.querySelector('.app'))
